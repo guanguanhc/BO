@@ -1,0 +1,41 @@
+import random
+import pandas as pd
+
+factors = {
+    "glucose": [10, 20, 30],  # Possible values for glucose concentration (g/L)
+    "peptone": [5, 10, 15],   # Possible values for peptone concentration (g/L)
+    "yeast_extract": [2, 4, 6],   # Possible values for yeast extract concentration (g/L)
+    "temperature": [25, 30, 35],   # Possible values for temperature (°C)
+    "time": [24, 48, 72],   # Possible values for time (hours)
+    "oxygen": [1, 2, 3],   # Possible values for oxygen level (%)
+    "pH": [6.5, 7.0, 7.5]   # Possible values for pH
+}
+
+data = []
+
+for _ in range(30):
+    glucose = random.choice(factors["glucose"])
+    peptone = random.choice(factors["peptone"])
+    yeast_extract = random.choice(factors["yeast_extract"])
+    temperature = random.choice(factors["temperature"])
+    time = random.choice(factors["time"])
+    oxygen = random.choice(factors["oxygen"])
+    pH = random.choice(factors["pH"])
+
+    # Calculate OD660 based on the controlled factors
+    OD660 = (glucose * peptone * yeast_extract) / (temperature * time * oxygen * pH)
+
+    data.append({
+        "Glucose": glucose,
+        "Peptone": peptone,
+        "Yeast Extract": yeast_extract,
+        "Temperature": temperature,
+        "Time": time,
+        "Oxygen": oxygen,
+        "pH": pH,
+        "OD660": OD660
+    })
+
+# Create a pandas DataFrame from the generated data
+df = pd.DataFrame(data)
+df
